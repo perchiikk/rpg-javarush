@@ -6,6 +6,7 @@ import com.game.entity.Race;
 import com.game.exception.NotFoundException;
 import com.game.exception.RequestException;
 import com.game.repository.PlayerRepository;
+import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceImpl implements ServicePlayer{
@@ -59,10 +61,12 @@ public class ServiceImpl implements ServicePlayer{
 
     @Override
     public Player getPlayer(Long id) {
-        if(!playerRepository.existsById(id)){
+        Optional<Player> o = playerRepository.findById(id);
+        if(o.isPresent()){
+            return o.get();
+        } else {
             throw new NotFoundException("Not found player with id");
         }
-        return playerRepository.findById(id).get();
     }
 
     @Override
