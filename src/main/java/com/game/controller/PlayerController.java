@@ -94,7 +94,9 @@ public class PlayerController {
     @ResponseBody
     public Player updatePlayer(@PathVariable("id") String id, @RequestBody Player player){
         Long currentId = playerService.checkId(id);
-        return playerService.editPlayer(currentId, player);
+        Player player1 = playerService.editPlayer(currentId, player);
+        System.out.println(player1);
+        return player1;
     }
 
     @DeleteMapping("players/{id}")

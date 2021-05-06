@@ -93,6 +93,11 @@ public class ServiceImpl implements ServicePlayer{
         if(player.getBirthday() != null){
             currentPlayer.setBirthday(player.getBirthday());
         }
+        if(player.getBanned() != null) {
+            currentPlayer.setBanned(player.getBanned());
+        } else {
+            currentPlayer.setBanned(Boolean.FALSE);
+        }
 
         Integer level = calculateLevel(currentPlayer);
         currentPlayer.setLevel(level);
